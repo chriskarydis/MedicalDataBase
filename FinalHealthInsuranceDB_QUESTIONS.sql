@@ -1,3 +1,4 @@
+-- 1st Question: "Which doctors and for what periods were monitoring patient 'P1'?"
 SELECT
     d.firstname AS doctor_firstname,
     d.lastname AS doctor_lastname,
@@ -10,7 +11,7 @@ JOIN
 WHERE
     s.amka = 'P1';
 
-
+-- 2nd Question: "Which medications have been prescribed to patient 'P2', by which doctor, and for which appointments?"
 SELECT
     m.med_name AS medicine_name,
     d.firstname AS doctor_firstname,
@@ -29,7 +30,7 @@ JOIN
 WHERE
     p.amka = 'P2';
 
-
+-- 3rd Question: "Present all the data from all appointments of patient 'P1' to doctor 'D2'."
 SELECT
     v.*,
     p.firstname AS patient_firstname,
@@ -51,7 +52,7 @@ JOIN
 WHERE
     p.amka = 'P1' AND d.doctorid = 'D2';
 
-
+-- 4th Question: "Present all the information about doctors (full name and specialty) and hospitals (name and location), so that we know which doctor collaborates with which hospitals."
 SELECT
     d.firstname || ' ' || d.lastname AS doctor_name,
     d.specialty,
@@ -66,7 +67,7 @@ JOIN
 JOIN
     address a ON hc.addressid = a.addressid;
 
-
+-- 5th Question: "Present the average values of patient 'P1' examinations."
 SELECT
     AVG(c.weight) AS avg_weight,
     AVG(c.height) AS avg_height,
@@ -81,7 +82,7 @@ JOIN
 WHERE
     p.amka = 'P1';
 
-
+-- 6th Question: "Present the number of doctors each patient has changed."
 SELECT
     s.amka AS patient_amka,
     COUNT(DISTINCT s.doctorid) AS num_changed_doctors
