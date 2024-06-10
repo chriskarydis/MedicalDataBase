@@ -1,0 +1,125 @@
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A1', '101 Maple St', 'Springfield', 'IL', 'USA', '62704');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A2', '202 Pine St', 'Shelbyville', 'IL', 'USA', '62705');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A3', '303 Cedar St', 'Capital City', 'IL', 'USA', '62706');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A4', '404 Birch St', 'Ogdenville', 'IL', 'USA', '62707');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A5', '505 Walnut St', 'North Haverbrook', 'IL', 'USA', '62708');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A6', '606 Willow St', 'Brockway', 'IL', 'USA', '62709');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A7', '123 Main St', 'Springfield', 'IL', 'USA', '62701');
+
+INSERT INTO address (addressid, street, city, region, country, postal_code)
+VALUES ('A8', '456 Elm St', 'Shelbyville', 'IL', 'USA', '62702');
+
+INSERT INTO doctor (doctorid, firstname, lastname, telephone, addressid, specialty, email, dateofbirth, sex)
+VALUES ('D1', 'John', 'Doe', '1234567890', 'A1', 'Cardiology', 'johndoe@example.com', TO_DATE('1970-01-01', 'YYYY-MM-DD'), 'Male');
+
+INSERT INTO doctor (doctorid, firstname, lastname, telephone, addressid, specialty, email, dateofbirth, sex)
+VALUES ('D2', 'Jane', 'Smith', '0987654321', 'A2', 'Neurology', 'janesmith@example.com', TO_DATE('1980-02-02', 'YYYY-MM-DD'), 'Female');
+
+INSERT INTO doctor (doctorid, firstname, lastname, telephone, addressid, specialty, email, dateofbirth, sex)
+VALUES ('D3', 'Christofer', 'White', '4567890123', 'A3', 'Cardiology', 'cwhite@example.com', TO_DATE('1975-01-01', 'YYYY-MM-DD'), 'Other');
+
+INSERT INTO patient (amka, firstname, lastname, fathername, sex, dateofbirth, telephone, email, addressid, insurancename, insuranceid, weight, height, bloodtype, familystatus, insuredby)
+VALUES ('P1', 'Alice', 'Brown', 'Michael', 'Female', TO_DATE('1990-03-03', 'YYYY-MM-DD'), '1122334455', 'alicebrown@example.com', 'A4', 'InsuranceA', 'INS123', 65, 170, 'O+', 'Single', NULL);
+
+INSERT INTO patient (amka, firstname, lastname, fathername, sex, dateofbirth, telephone, email, addressid, insurancename, insuranceid, weight, height, bloodtype, familystatus, insuredby)
+VALUES ('P2', 'Bob', 'White', 'David', 'Male', TO_DATE('1985-04-04', 'YYYY-MM-DD'), '6677889900', 'bobwhite@example.com', 'A5', 'InsuranceB', 'INS456', 80, 180, 'A+', 'Married', 'P1');
+
+INSERT INTO patient (amka, firstname, lastname, fathername, sex, dateofbirth, telephone, email, addressid, insurancename, insuranceid, weight, height, bloodtype, familystatus, insuredby)
+VALUES ('P3', 'Markos', 'Markou', 'John', 'Male', TO_DATE('1995-04-04', 'YYYY-MM-DD'), '6644889900', 'mmark@example.com', 'A6', 'InsuranceC', 'INS498', 78, 194, 'A-', 'Single', NULL);
+
+INSERT INTO hospital_clinic (hospitalclinicid, hosp_name, addressid, telephone, fax, email)
+VALUES ('HC1', 'CentralHospital', 'A7', '5551234567', '5557654321', 'contact@medicalblvd.com');
+
+INSERT INTO hospital_clinic (hospitalclinicid, hosp_name, addressid, telephone, fax, email)
+VALUES ('HC2', 'YourClinic', 'A8', '5559876543', '5553456789', 'info@healthave.com');
+
+INSERT INTO medicine (medicineid, med_name, med_type, expirationdate, activeingredients, med_usage, sideeffects, indications, prescriptionneeded)
+VALUES ('M1', 'Aspirin', 'Analgesic',  TO_DATE('2025-12-31', 'YYYY-MM-DD'), 'Acetylsalicylic Acid', 'Pain relief', 'Nausea', 'Headache', 'Yes');
+
+INSERT INTO medicine (medicineid, med_name, med_type, expirationdate, activeingredients, med_usage, sideeffects, indications, prescriptionneeded)
+VALUES ('M2', 'Paracetamol', 'Antipyretic',  TO_DATE('2026-06-30', 'YYYY-MM-DD'), 'Paracetamol', 'Fever reduction', 'Liver damage', 'Fever', 'No');
+
+INSERT INTO visit (visitid, visit_date, visit_type, amka, doctorid, hospitalclinicid)
+VALUES ('V1', TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'CheckUp', 'P1', 'D1', 'HC1');
+
+INSERT INTO visit (visitid, visit_date, visit_type, amka, doctorid, hospitalclinicid)
+VALUES ('V2', TO_DATE('2024-02-01', 'YYYY-MM-DD'), 'InspectionVisit', 'P2', 'D2', 'HC2');
+
+INSERT INTO visit (visitid, visit_date, visit_type, amka, doctorid, hospitalclinicid)
+VALUES ('V3', TO_DATE('2024-03-01', 'YYYY-MM-DD'), 'NewIssue', 'P1', 'D2', 'HC1');
+
+INSERT INTO visit (visitid, visit_date, visit_type, amka, doctorid, hospitalclinicid)
+VALUES ('V4', TO_DATE('2024-02-01', 'YYYY-MM-DD'), 'CheckUp', 'P1', 'D2', 'HC1');
+
+INSERT INTO visit (visitid, visit_date, visit_type, amka, doctorid, hospitalclinicid)
+VALUES ('V5', TO_DATE('2024-03-01', 'YYYY-MM-DD'), 'CheckUp', 'P1', 'D2', 'HC1');
+
+INSERT INTO checkup (visitid, weight, height, systolic_blood_pressure, diastolic_blood_pressure)
+VALUES ('V1', 65, 170, 120, 70);
+
+INSERT INTO checkup (visitid, weight, height, systolic_blood_pressure, diastolic_blood_pressure)
+VALUES ('V4', 75, 171, 125, 80);
+
+INSERT INTO checkup (visitid, weight, height, systolic_blood_pressure, diastolic_blood_pressure)
+VALUES ('V5', 80, 172, 115, 87);
+
+INSERT INTO inspectionvisit (visitid, statebetween)
+VALUES ('V2', 'Condition stable, no immediate concerns.');
+
+INSERT INTO newissue (visitid, initialdiagnosis)
+VALUES ('V3', 'Initial diagnosis indicates potential respiratory infection.');
+
+INSERT INTO prescription (prescriptionid, presc_type, startdate, expirationdate, comments, eligibility, dosage, doctorid, amka, visitid, is_renewable)
+VALUES ('PRES1', 'Regular', TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-06-01', 'YYYY-MM-DD'), 'Take with food', 'Yes', '500mg twice a day', 'D1', 'P1', 'V1', 'Yes');
+
+INSERT INTO prescription (prescriptionid, presc_type, startdate, expirationdate, comments, eligibility, dosage, doctorid, amka, visitid, is_renewable)
+VALUES ('PRES2', 'Regular', TO_DATE('2024-03-01', 'YYYY-MM-DD'), TO_DATE('2024-04-01', 'YYYY-MM-DD'), 'Take after food', 'No', '500mg once a day', 'D2', 'P2', 'V2', 'No');
+
+INSERT INTO renewable (prescriptionid, renewabletimes)
+VALUES ('PRES1', 3);
+
+INSERT INTO hospitalized (hospitalizedid, amka, hospitalclinicid, entrydate, exitdate)
+VALUES (1, 'P2', 'HC2', TO_DATE('2024-04-01', 'YYYY-MM-DD'), TO_DATE('2024-04-10', 'YYYY-MM-DD'));
+
+INSERT INTO includes (includesid, prescriptionid, medicineid)
+VALUES (1, 'PRES1', 'M1');
+
+INSERT INTO includes (includesid, prescriptionid, medicineid)
+VALUES (2, 'PRES2', 'M2');
+
+INSERT INTO supervise (recordid, amka, doctorid, startdate, enddate, comments)
+VALUES (1, 'P1', 'D1', TO_DATE('2022-01-01', 'YYYY-MM-DD'), TO_DATE('2022-12-31', 'YYYY-MM-DD'), 'Regular checkup supervision');
+
+INSERT INTO supervise (recordid, amka, doctorid, startdate, enddate, comments)
+VALUES (2, 'P1', 'D2', TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Regular checkup supervision');
+
+INSERT INTO supervise (recordid, amka, doctorid, startdate, enddate, comments)
+VALUES (3, 'P1', 'D3', TO_DATE('2024-01-01', 'YYYY-MM-DD'), '', 'Regular checkup supervision');
+
+INSERT INTO supervise (recordid, amka, doctorid, startdate, enddate, comments)
+VALUES (1, 'P2', 'D1', TO_DATE('2022-11-10', 'YYYY-MM-DD'), TO_DATE('2022-12-31', 'YYYY-MM-DD'), 'Regular checkup supervision');
+
+INSERT INTO supervise (recordid, amka, doctorid, startdate, enddate, comments)
+VALUES (2, 'P2', 'D2', TO_DATE('2023-01-01', 'YYYY-MM-DD'), '', 'Regular checkup supervision');
+
+INSERT INTO supervise (recordid, amka, doctorid, startdate, enddate, comments)
+VALUES (3, 'P3', 'D1', TO_DATE('2022-01-01', 'YYYY-MM-DD'), '', 'Regular checkup supervision');
+
+INSERT INTO workson (worksonid, doctorid, hospitalclinicid)
+VALUES (1, 'D1', 'HC1');
+
+INSERT INTO workson (worksonid, doctorid, hospitalclinicid)
+VALUES (2, 'D2', 'HC2');
