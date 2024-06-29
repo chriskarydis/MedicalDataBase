@@ -97,7 +97,7 @@
         }
         ?>
         
-        <a href="informantion.php">Return to Show Addresses Page</a>
+        <a href="informantion.html">Return to Show Addresses Page</a>
     </div>
 </body>
 </html>
