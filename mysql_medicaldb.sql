@@ -77,7 +77,7 @@ CREATE TABLE `hospitalized` (
   `hospitalizedid` int UNSIGNED NOT NULL,
   `entrydate` date NOT NULL,
   `exitdate` date DEFAULT NULL,
-  `amka` BIGINT UNSIGNED NOT NULL,
+  `amka` varchar(60) NOT NULL,
   `hospitalclinicid` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -155,7 +155,7 @@ CREATE TABLE `newissue` (
 --
 
 CREATE TABLE `patient` (
-  `amka` BIGINT UNSIGNED NOT NULL,
+  `amka` varchar(60) NOT NULL,
   `firstname` varchar(60) NOT NULL,
   `middlename` varchar(60) NOT NULL,
   `lastname` varchar(60) NOT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE `patient` (
   `height` decimal(6,3) NOT NULL,
   `bloodtype` ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,
   `familystatus` ENUM('Divorced', 'Married', 'Single', 'Widowed', 'Separated') NOT NULL,
-  `insuredby` BIGINT UNSIGNED DEFAULT NULL
+  `insuredby` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -189,7 +189,7 @@ CREATE TABLE `prescription` (
   `eligibility` ENUM('Yes', 'No') NOT NULL,
   `dosage` int(30) NOT NULL,
   `doctorid` int UNSIGNED NOT NULL,
-  `amka` BIGINT UNSIGNED NOT NULL,
+  `amka` varchar(60) NOT NULL,
   `visitid` int UNSIGNED NOT NULL,
   `is_renewable` ENUM('Yes', 'No') NOT NULL DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -216,7 +216,7 @@ CREATE TABLE `supervise` (
   `startdate` date NOT NULL,
   `enddate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
-  `amka` BIGINT UNSIGNED NOT NULL,
+  `amka` varchar(60) NOT NULL,
   `doctorid` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -228,9 +228,9 @@ CREATE TABLE `supervise` (
 
 CREATE TABLE `visit` (
   `visitid` int UNSIGNED NOT NULL,
-  `visit_date` date NOT NULL,
+  `visit_date` datetime NOT NULL,
   `visit_type` ENUM('CheckUp', 'Inspection', 'NewIssue') NOT NULL,
-  `amka` BIGINT UNSIGNED NOT NULL,
+  `amka` varchar(60) NOT NULL,
   `doctorid` int UNSIGNED NOT NULL,
   `hospitalclinicid` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
