@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Health Insurance App by Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis)">
+    <meta name="keywords" content="Health Insurance, Doctors, Patients, Hospitals, Clinics, Medicines, CheckUps, Inspections">
+    <meta name="author" content="Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis)">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Health Insurance App Informations</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        .links a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .links a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .links a {
+                margin: 5px 0;
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .header, .footer {
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .header h1, .footer p {
+            margin: 0;
+        }
+
+        .container .title {
+            font-size: 1.5em; 
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: underline;
+            margin-bottom: 20px;
+        }
+
+        .container img {
+            max-width: 200px; 
+            margin-bottom: 20px;
+        }
+
+        .links a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #f0f8ff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .links a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .links a:active {
+            background-color: #0056b3;
+        }
+
+        .return-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .return-button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .links a {
+                margin: 8px 0;
+                padding: 10px;
+            }
+
+            .return-button {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Group 33 Health Insurance App</h1>
+        </div>
+        <img src="logo.png" alt="Company Logo">
+        <div class="links">
+            <a href='address/address.php' aria-label='Show Addresses'>1. Show Addresses</a>
+            <a href='address/newAddress.php' aria-label='Add New Address'>2. Add New Address</a>
+            <a href='doctor/doctor.php' aria-label='Show Doctors'>3. Show Doctors</a>
+            <a href='doctor/newDoctor.php' aria-label='Add New Doctor'>4. Add New Doctor</a>
+            <a href='patient/Patient.php' aria-label='Show Patients'>5. Show Patients</a>
+            <a href='patient/newPatient.php' aria-label='Add New Patient'>6. Add New Patient</a>
+            <a href='hospitalClinic/hospitalClinic.php' aria-label='Show Hospitals and Clinics'>7. Show Hospitals and Clinics</a>
+            <a href='hospitalClinic/newHospitalClinic.php' aria-label='Add New Hospital or Clinic'>8. Add New Hospital or Clinic</a>
+            <a href='medicine/medicine.php' aria-label='Show Medicines'>9. Show Medicines</a>
+            <a href='medicine/newMedicine.php' aria-label='Add New Medicine'>10. Add New Medicine</a>
+            <a href='visit/visit.php' aria-label='Show Visits'>11. Show Visits</a>
+            <a href='visit/newVisit.php' aria-label='Add New Visit'>12. Add New Visit</a>
+            <a href='checkup/checkup.php' aria-label='Show CheckUps'>13. Show CheckUps</a>
+            <a href='checkup/newCheckup.php' aria-label='Add New CheckUp'>14. Add New CheckUp</a>
+            <a href='newissue/newissue.php' aria-label='Show New Issues'>15. Show New Issues</a>
+            <a href='newissue/newNewissue.php' aria-label='Add New Issue'>16. Add New Issue</a>
+            <a href='inspection/inspection.php' aria-label='Show Inspections'>17. Show Inspections</a>
+            <a href='inspection/newInspection.php' aria-label='Add New Inspection'>18. Add New Inspection</a>
+            <a href='prescription/prescription.php' aria-label='Show Prescriptions'>19. Show Prescriptions</a>
+            <a href='prescription/newPrescription.php' aria-label='Add New Prescription'>20. Add New Prescription</a>
+            <a href='renewable/renewable.php' aria-label='Show Renewables'>21. Show Renewables</a>
+            <a href='renewable/newRenewable.php' aria-label='Add New Renewable'>22. Add New Renewable</a>
+            <a href='worksOn/workson.php' aria-label='Show Works On Relations'>23. Show Works On Relations</a>
+            <a href='worksOn/newWorkson.php' aria-label='Add New Works On Relation'>24. Add New Works On Relation</a>
+            <a href='supervise/supervise.php' aria-label='Show Supervise Relations'>25. Show Supervise Relations</a>
+            <a href='supervise/newSupervise.php' aria-label='Add New Supervise Relation'>26. Add New Supervise Relation</a>
+            <a href='includes/includes.php' aria-label='Show Includes Relations'>27. Show Includes Relations</a>
+            <a href='includes/newIncludes.php' aria-label='Add New Includes Relation'>28. Add New Includes Relation</a>
+            <a href='hospitalized/hospitalized.php' aria-label='Show Hospitalized Relations'>29. Show Hospitalized Relations</a>
+            <a href='hospitalized/newHospitalized.php' aria-label='Add New Hospitalized Relation'>30. Add New Hospitalized Relation</a>
+        </div>
+        <a href="index.html" class="return-button">Return to Main Page</a>
+        <div class="footer">
+            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

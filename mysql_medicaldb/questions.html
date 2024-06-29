@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Health Insurance App by Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis)">
+    <meta name="keywords" content="Health Insurance, Doctors, Patients, Hospitals, Clinics, Medicines, CheckUps, Inspections">
+    <meta name="author" content="Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis)">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Health Insurance App Questions</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-size: 16px; /* Adjusted font size */
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px; /* Increased padding */
+            border-radius: 15px; /* Increased border radius */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); /* Increased shadow */
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        h2, h3 {
+            color: #333;
+            margin-bottom: 20px; /* Added margin to headings */
+        }
+
+        form {
+            margin-bottom: 30px; /* Increased space between forms */
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: calc(100% - 24px);
+            padding: 12px; /* Increased padding */
+            margin-bottom: 20px; /* Increased margin bottom */
+            font-size: 16px;
+            border: 2px solid #ccc; /* Increased border width */
+            border-radius: 6px; /* Increased border radius */
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px); /* Added subtle hover effect */
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Questions</h2>
+
+        <!-- Question B.1 -->
+        <form action="query1.php" method="post">
+            <h3>1. Doctors and Periods Monitoring Patient</h3>
+            <label for="patient1">Patient ID/Name:</label>
+            <input type="text" id="patient1" name="patient">
+            <input type="submit" value="GO">
+        </form>
+
+        <!-- Question B.2 -->
+        <form action="query2.php" method="post">
+            <h3>2. Prescribed Medicines, Doctors, and Visits</h3>
+            <label for="patient2">Patient ID/Name:</label>
+            <input type="text" id="patient2" name="patient">
+            <input type="submit" value="GO">
+        </form>
+
+        <!-- Question B.3 -->
+        <form action="query3.php" method="post">
+            <h3>3. All Data of Visits</h3>
+            <label for="patient3">Patient ID/Name:</label>
+            <input type="text" id="patient3" name="patient">
+            <label for="doctor3">Doctor ID/Name:</label>
+            <input type="text" id="doctor3" name="doctor">
+            <input type="submit" value="GO">
+        </form>
+
+        <!-- Question B.4 -->
+        <form action="query4.php" method="post">
+            <h3>4. Doctors and Hospitals Collaboration</h3>
+            <input type="submit" value="GO">
+        </form>
+
+        <!-- Question B.5 -->
+        <form action="query5.php" method="post">
+            <h3>5. Average Examination Values</h3>
+            <label for="patient5">Patient ID/Name:</label>
+            <input type="text" id="patient5" name="patient">
+            <input type="submit" value="GO">
+        </form>
+
+        <!-- Question B.6 -->
+        <form action="query6.php" method="post">
+            <h3>6. Number of Doctors Changed by Each Patient</h3>
+            <input type="submit" value="GO">
+        </form>
+
+        <a href="index.html" class="back-link">Return to Main Page</a>
+    </div>
+</body>
+</html>
