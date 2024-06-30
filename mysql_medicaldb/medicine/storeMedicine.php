@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Save - Group 33 Health Insurance App</title>
+    <title>Save Medicine Data - Group 33 Health Insurance App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -62,6 +62,15 @@
         <?php
         include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
+        function allFieldsFilled($fields) {
+            foreach ($fields as $field) {
+                if (empty($field)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         $medicineid = $_POST['medicineid'];
         $med_name = $_POST['med_name'];
         $med_type = $_POST['med_type'];
@@ -71,6 +80,13 @@
         $sideeffects = $_POST['sideeffects'];
         $indications = $_POST['indications'];
         $prescreptionneeded = $_POST['prescreptionneeded'];
+
+        $requiredFields = array($med_name, $med_type, $expirationdate, $activeingredients, $med_usage, $sideeffects, $indications, $prescreptionneeded);
+        if (!allFieldsFilled($requiredFields)) {
+            echo "<p>Error: Not all required fields are filled.</p>";
+            echo "<a href='javascript:history.back()'>Go Back to Add New Medicine</a>";
+            die();
+        }
 
         $insertSQL = "INSERT INTO medicine (medicineid, med_name, med_type, expirationdate, activeingredients, med_usage, sideeffects, indications, prescreptionneeded) 
                       VALUES ('$medicineid', '$med_name', '$med_type', '$expirationdate', '$activeingredients', '$med_usage', '$sideeffects', '$indications', '$prescreptionneeded')";
@@ -85,10 +101,10 @@
         ?>
 
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
 
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>

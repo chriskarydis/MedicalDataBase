@@ -143,9 +143,9 @@
             <input type='submit' value='Save Data' class="btn">
         </form>
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>
