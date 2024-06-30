@@ -85,11 +85,27 @@
         <?php
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
+            function allFieldsFilled($fields) {
+                foreach ($fields as $field) {
+                    if (empty($field)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
             $hospitalizedid = $_POST['hospitalizedid'];
             $entrydate = $_POST['entrydate'];
             $exitdate = $_POST['exitdate'];
             $amka = $_POST['amka'];
             $hospitalclinicid = $_POST['hospitalclinicid'];
+
+            $requiredFields = array($entrydate, $amka, $hospitalclinicid);
+            if (!allFieldsFilled($requiredFields)) {
+                echo "<p class='error-message'>Error: Not all required fields are filled.</p>";
+                echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Hospitalized Record</a>";
+                die();
+            }
 
             $insertSQL = "INSERT INTO hospitalized (hospitalizedid, entrydate, exitdate, amka, hospitalclinicid) 
                         VALUES ('$hospitalizedid', '$entrydate', '$exitdate', '$amka', '$hospitalclinicid')";
@@ -103,7 +119,7 @@
             $conn->close();
         ?>
         <br><br>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>
