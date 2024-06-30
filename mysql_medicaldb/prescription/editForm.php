@@ -172,7 +172,7 @@
                     
             <input type='submit' value='Save Data'>
         </form><br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
     </div>
 </body>
 </html>

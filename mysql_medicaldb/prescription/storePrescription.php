@@ -85,6 +85,15 @@
         <?php
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
+            function allFieldsFilled($fields) {
+                foreach ($fields as $field) {
+                    if (empty($field)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
             $prescriptionid = $_POST['prescriptionid'];
             $presc_type = $_POST['presc_type'];
             $startdate = $_POST['startdate'];
@@ -96,6 +105,13 @@
             $amka = $_POST['amka'];
             $visitid = $_POST['visitid'];
             $is_renewable = $_POST['is_renewable']; 
+
+            $requiredFields = array($presc_type, $startdate, $dosage, $doctorid, $amka, $visitid);
+            if (!allFieldsFilled($requiredFields)) {
+                echo "<p class='error-message'>Error: Not all required fields are filled.</p>";
+                echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Prescription</a>";
+                die();
+            }
 
             $insertSQL = "INSERT INTO prescription (prescriptionid, presc_type, startdate, expirationdate, comments, eligibility, dosage, doctorid, amka, visitid, is_renewable) 
                         VALUES ('$prescriptionid', '$presc_type', '$startdate', '$expirationdate', '$comments', '$eligibility', '$dosage', '$doctorid', '$amka', '$visitid', '$is_renewable')";
@@ -109,7 +125,7 @@
             $conn->close();
         ?>
         
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>
