@@ -91,8 +91,6 @@
                 while ($row = $result->fetch_assoc()) {
                     $prescriptionOptions .= "<option value='" . $row["prescriptionid"] . "'>" . $row["prescriptionid"] . "</option>";
                 }
-            } else {
-                $prescriptionOptions .= "<option value=''>No available prescription IDs</option>";
             }
 
             $conn->close();
@@ -104,11 +102,11 @@
             </select>
             <br><br>
             <label for="renewabletimes">Renewable Times:</label>
-            <input id="renewabletimes" name="renewabletimes" type="text" value="<?php echo isset($renewabletimes) ? $renewabletimes : ''; ?>"><br><br>
+            <input id="renewabletimes" name="renewabletimes" type='number' value="<?php echo isset($renewabletimes) ? $renewabletimes : ''; ?>"><br><br>
             <input type="submit" value="Save Data">
         </form>
         <br><br>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>

@@ -71,15 +71,23 @@
             $insertSQL = "INSERT INTO renewable (prescriptionid, renewabletimes) 
                         VALUES ('$prescriptionid', '$renewabletimes')";
 
-            if ($conn->query($insertSQL) === TRUE) {
-                echo "<p class='message success-message'>New record created successfully</p>";
-            } else {
-                echo "<p class='message error-message'>Error: " . $insertSQL . "<br>" . $conn->error . "</p>";
+            try {
+                if ($conn->query($insertSQL) === TRUE) {
+                    echo "<p class='message success-message'>New record created successfully</p>";
+                } else {
+                    throw new Exception($conn->error);
+                }
+            } catch (Exception $e) {
+                if (strpos($e->getMessage(), 'foreign key constraint fails') !== false) {
+                    echo "<p class='message error-message'>Error: The specified prescription ID does not exist. Please ensure it is correct and try again.</p>";
+                } else {
+                    echo "<p class='message error-message'>Error: " . $e->getMessage() . "</p>";
+                }
             }
 
             $conn->close();
         ?>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>
