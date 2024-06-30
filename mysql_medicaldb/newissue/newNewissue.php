@@ -88,8 +88,6 @@
                 while ($row = $result->fetch_assoc()) {
                     $visitOptions .= "<option value='" . $row["visitid"] . "'>" . $row["visitid"] . "</option>";
                 }
-            } else {
-                $visitOptions .= "<option value=''>No available visit IDs</option>";
             }
 
             $conn->close();
@@ -106,7 +104,7 @@
             <input type='submit' value='Save Data'>
         </form>
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
     </div>
 </body>
 </html>

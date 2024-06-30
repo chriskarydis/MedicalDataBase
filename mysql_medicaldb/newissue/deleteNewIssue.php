@@ -95,7 +95,7 @@
                 echo "<div class='error-message'>Delete Failure: ".$conn->error."</div>";
             }
         ?>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>
