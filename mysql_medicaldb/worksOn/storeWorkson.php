@@ -100,7 +100,7 @@
 
             $conn->close();
         ?>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>

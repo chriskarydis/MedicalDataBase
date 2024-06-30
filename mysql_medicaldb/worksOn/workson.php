@@ -93,40 +93,48 @@
             <tr>
                 <th>Workson ID</th>
                 <th>Doctor ID</th>
+                <th>Doctor Name</th>
                 <th>Hospital Clinic ID</th>
+                <th>Hospital Name</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
             <?php        
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
-            
-            $sql = "SELECT worksonid, doctorid, hospitalclinicid FROM workson ORDER BY worksonid";
-            
+
+            $sql = "SELECT w.worksonid, w.doctorid, d.firstname, d.lastname, w.hospitalclinicid, h.hosp_name
+                    FROM workson w
+                    JOIN doctor d ON w.doctorid = d.doctorid
+                    JOIN hospital_clinic h ON w.hospitalclinicid = h.hospitalclinicid
+                    ORDER BY w.worksonid";
+
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $worksonid = htmlspecialchars($row["worksonid"]);
                     $doctorid = htmlspecialchars($row["doctorid"]);
+                    $doctor_name = htmlspecialchars($row["firstname"] . " " . $row["lastname"]);
                     $hospitalclinicid = htmlspecialchars($row["hospitalclinicid"]);
+                    $hospital_name = htmlspecialchars($row["hosp_name"]);
                     echo "<tr>"; 
-                    echo "<td>$worksonid</td><td>$doctorid</td><td>$hospitalclinicid</td>";
+                    echo "<td>$worksonid</td><td>$doctorid</td><td>$doctor_name</td><td>$hospitalclinicid</td><td>$hospital_name</td>";
                     echo "<td><a href='editForm.php?worksonid=$worksonid'>Edit</a></td>";
                     echo "<td><a href='deleteWorkson.php?worksonid=$worksonid'>Delete</a></td>";
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='5'>No workson records found.</td></tr>";
+                echo "<tr><td colspan='7'>No workson records found.</td></tr>";
             }
-            
+
             $conn->close();
             ?>    
         </table>
-        
+
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
 
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>
