@@ -67,40 +67,56 @@
         <?php
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
-			$doctorid = isset($_POST['doctorid']) ? $_POST['doctorid'] : ''; 
-			$firstname = $_POST['firstname'];
-			$middlename = $_POST['middlename'];
-			$lastname = $_POST['lastname'];
-			$dateofbirth = $_POST['dateofbirth'];
-			$addressid = $_POST['addressid'];
-			$specialty = $_POST['specialty'];
-			$email = $_POST['email'];
-			$telephone = $_POST['telephone'];
-			$sex = $_POST['sex'];
+            function allFieldsFilled($fields) {
+                foreach ($fields as $field) {
+                    if (empty($field)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
 
-			$checkAddressQuery = "SELECT COUNT(*) as count FROM address WHERE addressid = '$addressid'";
-			$checkAddressResult = $conn->query($checkAddressQuery);
-			if ($checkAddressResult && $checkAddressResult->num_rows > 0) {
-				$addressRow = $checkAddressResult->fetch_assoc();
-				if ($addressRow['count'] > 0) {
-					$insertQuery = "INSERT INTO doctor (firstname, middlename, lastname, dateofbirth, addressid, specialty, email, telephone, sex) 
-									VALUES ('$firstname', '$middlename', '$lastname', '$dateofbirth', '$addressid', '$specialty', '$email', '$telephone', '$sex')";
+            $doctorid = isset($_POST['doctorid']) ? $_POST['doctorid'] : ''; 
+            $firstname = $_POST['firstname'];
+            $middlename = $_POST['middlename'];
+            $lastname = $_POST['lastname'];
+            $dateofbirth = $_POST['dateofbirth'];
+            $addressid = $_POST['addressid'];
+            $specialty = $_POST['specialty'];
+            $email = $_POST['email'];
+            $telephone = $_POST['telephone'];
+            $sex = $_POST['sex'];
 
-					if ($conn->query($insertQuery) === TRUE) {
-						echo "<p class='success-message'>New record created successfully</p>";
-					} else {
-						echo "<p class='error-message'>Error: " . $insertQuery . "<br>" . $conn->error . "</p>";
-					}
-				} else {
-					echo "<p class='error-message'>Error: Invalid addressid provided.</p>";
-				}
-			} else {
-				echo "<p class='error-message'>Error: Checking addressid failed.</p>";
-			}
+            $requiredFields = array($firstname, $lastname, $dateofbirth, $addressid, $specialty, $email, $telephone, $sex);
+            if (!allFieldsFilled($requiredFields)) {
+                echo "<p class='error-message'>Error: Not all required fields are filled.</p>";
+                echo "<a href='javascript:history.back()' class='return-link'>Go Back to Add New Doctor</a>";
+                die();
+            }
+
+            $checkAddressQuery = "SELECT COUNT(*) as count FROM address WHERE addressid = '$addressid'";
+            $checkAddressResult = $conn->query($checkAddressQuery);
+            if ($checkAddressResult && $checkAddressResult->num_rows > 0) {
+                $addressRow = $checkAddressResult->fetch_assoc();
+                if ($addressRow['count'] > 0) {
+                    $insertQuery = "INSERT INTO doctor (firstname, middlename, lastname, dateofbirth, addressid, specialty, email, telephone, sex) 
+                                    VALUES ('$firstname', '$middlename', '$lastname', '$dateofbirth', '$addressid', '$specialty', '$email', '$telephone', '$sex')";
+
+                    if ($conn->query($insertQuery) === TRUE) {
+                        echo "<p class='success-message'>New record created successfully</p>";
+                    } else {
+                        echo "<p class='error-message'>Error: " . $insertQuery . "<br>" . $conn->error . "</p>";
+                    }
+                } else {
+                    echo "<p class='error-message'>Error: Invalid addressid provided.</p>";
+                }
+            } else {
+                echo "<p class='error-message'>Error: Checking addressid failed.</p>";
+            }
 
             $conn->close();
         ?>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>
