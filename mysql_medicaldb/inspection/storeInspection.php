@@ -85,24 +85,54 @@
         <?php
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
-            
+            function allFieldsFilled($fields) {
+                foreach ($fields as $field) {
+                    if (empty($field)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
             $visitid = $_POST['visitid'];
             $statebetween = $_POST['statebetween'];
 
-            
-            $insertSQL = "INSERT INTO inspection (visitid, statebetween) 
-                        VALUES ('$visitid', '$statebetween')";
+            $requiredFields = array($statebetween);
+            if (!allFieldsFilled($requiredFields)) {
+                echo "<p class='error-message'>Error: Not all required fields are filled.</p>";
+                echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Inspection</a>";
+                die();
+            }
 
-            if ($conn->query($insertSQL) === TRUE) {
-                echo "<div class='success-message'>New record created successfully</div>";
-            } else {
-                echo "<div class='error-message'>Error: " . $insertSQL . "<br>" . $conn->error . "</div>";
+            try {
+                $checkVisitIDQuery = "SELECT COUNT(*) as count FROM inspection WHERE visitid = '$visitid'";
+                $checkVisitIDResult = $conn->query($checkVisitIDQuery);
+                if ($checkVisitIDResult && $checkVisitIDResult->num_rows > 0) {
+                    $visitidRow = $checkVisitIDResult->fetch_assoc();
+                    if ($visitidRow['count'] > 0) {
+                        echo "<div class='error-message'>Error: Visit ID '$visitid' already exists in the inspection database.</div>";
+                        echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Inspection</a>";
+                    } else {
+                        $insertSQL = "INSERT INTO inspection (visitid, statebetween) 
+                                      VALUES ('$visitid', '$statebetween')";
+
+                        if ($conn->query($insertSQL) === TRUE) {
+                            echo "<div class='success-message'>New record created successfully</div>";
+                            echo "<a href='../information.html' class='return-button'>Return to Home Page</a>";
+                        } else {
+                            throw new Exception($conn->error);
+                        }
+                    }
+                } else {
+                    throw new Exception("Error checking Visit ID");
+                }
+            } catch (Exception $e) {
+                echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
+                echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Inspection</a>";
             }
 
             $conn->close();
         ?>
-
-        <a href="../informantion.html" class="return-button">Return to Home Page</a>
     </div>
 </body>
 </html>
