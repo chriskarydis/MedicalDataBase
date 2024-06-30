@@ -91,7 +91,7 @@
             $systolic_blood_pressure = $_POST['systolic_blood_pressure'];
             $diastolic_blood_pressure = $_POST['diastolic_blood_pressure'];
 
-            $requiredFields = array($visitid, $weight, $height, $systolic_blood_pressure, $diastolic_blood_pressure);
+            $requiredFields = array($weight, $height, $systolic_blood_pressure, $diastolic_blood_pressure);
             foreach ($requiredFields as $field) {
                 if (empty($field)) {
                     echo "<p class='error-message'>Error: All fields must be filled.</p>";
@@ -100,28 +100,30 @@
                 }
             }
 
-            $checkVisitIDQuery = "SELECT COUNT(*) as count FROM checkup WHERE visitid = '$visitid'";
-            $checkVisitIDResult = $conn->query($checkVisitIDQuery);
-            if ($checkVisitIDResult && $checkVisitIDResult->num_rows > 0) {
-                $visitidRow = $checkVisitIDResult->fetch_assoc();
-                if ($visitidRow['count'] > 0) {
-                    echo "<p class='error-message'>Error: Visit ID '$visitid' already exists in the checkup database.</p>";
-                    echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Checkup</a>";
-                } else {
-
-                    $insertSQL = "INSERT INTO checkup (visitid, weight, height, systolic_blood_pressure, diastolic_blood_pressure) 
-                                  VALUES ('$visitid', '$weight', '$height', '$systolic_blood_pressure', '$diastolic_blood_pressure')";
-
-                    if ($conn->query($insertSQL) === TRUE) {
-                        echo "<p class='success-message'>New checkup record created successfully</p>";
-                        echo "<a href='../informantion.html' class='return-button'>Return to Home Page</a>";
-                    } else {
-                        echo "<p class='error-message'>Error: " . $insertSQL . "<br>" . $conn->error . "</p>";
+            try {
+                $checkVisitIDQuery = "SELECT COUNT(*) as count FROM checkup WHERE visitid = '$visitid'";
+                $checkVisitIDResult = $conn->query($checkVisitIDQuery);
+                if ($checkVisitIDResult && $checkVisitIDResult->num_rows > 0) {
+                    $visitidRow = $checkVisitIDResult->fetch_assoc();
+                    if ($visitidRow['count'] > 0) {
+                        echo "<p class='error-message'>Error: Visit ID '$visitid' already exists in the checkup database.</p>";
                         echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Checkup</a>";
+                    } else {
+                        $insertSQL = "INSERT INTO checkup (visitid, weight, height, systolic_blood_pressure, diastolic_blood_pressure) 
+                                      VALUES ('$visitid', '$weight', '$height', '$systolic_blood_pressure', '$diastolic_blood_pressure')";
+
+                        if ($conn->query($insertSQL) === TRUE) {
+                            echo "<p class='success-message'>New checkup record created successfully</p>";
+                            echo "<a href='../information.html' class='return-button'>Return to Home Page</a>";
+                        } else {
+                            throw new Exception($conn->error);
+                        }
                     }
+                } else {
+                    throw new Exception("Error checking Visit ID");
                 }
-            } else {
-                echo "<p class='error-message'>Error: Checking Visit ID failed.</p>";
+            } catch (Exception $e) {
+                echo "<p class='error-message'>Error: " . $e->getMessage() . "</p>";
                 echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Checkup</a>";
             }
 
