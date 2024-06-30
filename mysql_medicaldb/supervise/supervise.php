@@ -30,7 +30,7 @@
         }
 
         .table-container {
-            overflow-x: auto; /* Ensure the table itself scrolls */
+            overflow-x: auto; 
             margin-top: 20px;
         }
 
@@ -95,12 +95,25 @@
         <div class="table-container">
             <table>
                 <tr>
-                    <th>Record ID</th><th>Start Date</th><th>End Date</th><th>Comments</th><th>AMKA</th><th>Doctor ID</th><th>Edit</th><th>Delete</th>
+                    <th>Record ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Comments</th>
+                    <th>AMKA</th>
+                    <th>Patient Name</th>
+                    <th>Doctor ID</th>
+                    <th>Doctor Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 <?php        
                 include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
                 
-                $sql = "SELECT recordid, startdate, enddate, comments, amka, doctorid FROM supervise ORDER BY recordid";
+                $sql = "SELECT s.recordid, s.startdate, s.enddate, s.comments, s.amka, p.firstname AS pfirstname, p.lastname AS plastname, s.doctorid, d.firstname AS dfirstname, d.lastname AS dlastname
+                        FROM supervise s
+                        JOIN patient p ON s.amka = p.amka
+                        JOIN doctor d ON s.doctorid = d.doctorid
+                        ORDER BY s.recordid";
                 
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
@@ -110,15 +123,17 @@
                         $enddate = htmlspecialchars($row["enddate"]);
                         $comments = htmlspecialchars($row["comments"]);
                         $amka = htmlspecialchars($row["amka"]);
+                        $patient_name = htmlspecialchars($row["pfirstname"] . " " . $row["plastname"]);
                         $doctorid = htmlspecialchars($row["doctorid"]);
+                        $doctor_name = htmlspecialchars($row["dfirstname"] . " " . $row["dlastname"]);
                         echo "<tr>"; 
-                        echo "<td>$recordid</td><td>$startdate</td><td>$enddate</td><td>$comments</td><td>$amka</td><td>$doctorid</td>";
+                        echo "<td>$recordid</td><td>$startdate</td><td>$enddate</td><td>$comments</td><td>$amka</td><td>$patient_name</td><td>$doctorid</td><td>$doctor_name</td>";
                         echo "<td><a href='editForm.php?recordid=$recordid'>Edit</a></td>";
                         echo "<td><a href='deleteSupervise.php?recordid=$recordid'>Delete</a></td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='8'>No supervision records found.</td></tr>";
+                    echo "<tr><td colspan='10'>No supervision records found.</td></tr>";
                 }
                 
                 $conn->close();
@@ -127,10 +142,10 @@
         </div>
         
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
 
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>

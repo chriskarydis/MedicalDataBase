@@ -85,12 +85,28 @@
         <?php
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
+            function allFieldsFilled($fields) {
+                foreach ($fields as $field) {
+                    if (empty($field)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
             $recordid = $_POST['recordid'];
             $startdate = $_POST['startdate'];
             $enddate = $_POST['enddate'];
             $comments = $_POST['comments'];
             $amka = $_POST['amka'];
             $doctorid = $_POST['doctorid'];
+
+            $requiredFields = array($startdate, $enddate, $amka, $doctorid);
+            if (!allFieldsFilled($requiredFields)) {
+                echo "<div class='error-message'>Error: Not all required fields are filled.</div>";
+                echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Supervision Record</a>";
+                die();
+            }
 
             $insertSQL = "INSERT INTO supervise (recordid, startdate, enddate, comments, amka, doctorid) 
                           VALUES ('$recordid', '$startdate', '$enddate', '$comments', '$amka', '$doctorid')";
@@ -103,7 +119,7 @@
 
             $conn->close();
         ?>
-        <a href="../informantion.html" class="return-link">Return to Home Page</a>
+        <a href="../information.html" class="return-link">Return to Home Page</a>
     </div>
 </body>
 </html>
