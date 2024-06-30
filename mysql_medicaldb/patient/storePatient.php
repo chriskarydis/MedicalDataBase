@@ -139,7 +139,7 @@
                     
                     if ($stmt->execute())  {
                         echo "<p class='success-message'>New record created successfully</p>";
-                        echo "<a href='../informantion.html' class='return-button'>Return to Home Page</a>";
+                        echo "<a href='../information.html' class='return-button'>Return to Home Page</a>";
                     } else {
                         echo "<p class='error-message'>Error: " . $insertQuery . "<br>" . $conn->error . "</p>";
                         echo "<a href='javascript:history.back()' class='return-button'>Go Back to Add New Patient</a>";
