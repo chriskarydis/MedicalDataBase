@@ -97,13 +97,13 @@
         <?php
             include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
-            $addressQuery = "SELECT addressid FROM address";
+            $addressQuery = "SELECT addressid, street, city, region, country FROM address";
             $addressResult = $conn->query($addressQuery);
 
-            $addressOptions = "<option value=''>None</option>"; 
+            $addressOptions = ""; 
             if ($addressResult->num_rows > 0) {
                 while ($row = $addressResult->fetch_assoc()) {
-                    $addressOptions .= "<option value='" . $row['addressid'] . "'>" . $row['addressid'] . "</option>";
+                    $addressOptions .= "<option value='" . $row['addressid'] . "'>" . $row['addressid'] . " - " . $row['street'] . ", " . $row['city'] . ", " . $row['region'] . ", " . $row['country'] . "</option>";
                 }
             }
         ?>
@@ -141,9 +141,9 @@
             <input type='submit' value='Save Data' class="btn">
         </form>
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>

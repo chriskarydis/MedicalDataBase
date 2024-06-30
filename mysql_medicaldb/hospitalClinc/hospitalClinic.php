@@ -90,14 +90,15 @@
         <div style="overflow-x: auto;">
             <table>
                 <tr>
-                    <th>Hospital ID</th><th>Hospital Name</th><th>Address ID</th><th>Telephone</th><th>Fax</th><th>Email</th><th>Edit</th><th>Delete</th>
+                    <th>Hospital ID</th><th>Hospital Name</th><th>Address ID</th><th>Street</th><th>City</th><th>Region</th><th>Country</th><th>Telephone</th><th>Fax</th><th>Email</th><th>Edit</th><th>Delete</th>
                 </tr>
                 <?php        
                 include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
-                $sql = "SELECT hospitalclinicid, hosp_name, addressid, telephone, fax, email
-                        FROM hospital_clinic
-                        ORDER BY hospitalclinicid";
+                $sql = "SELECT hc.hospitalclinicid, hc.hosp_name, hc.addressid, a.street, a.city, a.region, a.country, hc.telephone, hc.fax, hc.email
+                        FROM hospital_clinic hc
+                        JOIN address a ON hc.addressid = a.addressid
+                        ORDER BY hc.hospitalclinicid";
 
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
@@ -105,17 +106,21 @@
                         $hospitalclinicid = htmlspecialchars($row["hospitalclinicid"]);
                         $hosp_name = htmlspecialchars($row["hosp_name"]);
                         $addressid = htmlspecialchars($row["addressid"]);
+                        $street = htmlspecialchars($row["street"]);
+                        $city = htmlspecialchars($row["city"]);
+                        $region = htmlspecialchars($row["region"]);
+                        $country = htmlspecialchars($row["country"]);
                         $telephone = htmlspecialchars($row["telephone"]);
                         $fax = htmlspecialchars($row["fax"]);
                         $email = htmlspecialchars($row["email"]);
                         echo "<tr>"; 
-                        echo "<td>$hospitalclinicid</td><td>$hosp_name</td><td>$addressid</td><td>$telephone</td><td>$fax</td><td>$email</td>";
+                        echo "<td>$hospitalclinicid</td><td>$hosp_name</td><td>$addressid</td><td>$street</td><td>$city</td><td>$region</td><td>$country</td><td>$telephone</td><td>$fax</td><td>$email</td>";
                         echo "<td><a href='editForm.php?hospitalclinicid=$hospitalclinicid'>Edit</a></td>";
                         echo "<td><a href='deleteHospitalClinic.php?hospitalclinicid=$hospitalclinicid'>Delete</a></td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='8'>No hospitals found.</td></tr>";
+                    echo "<tr><td colspan='12'>No hospitals found.</td></tr>";
                 }
 
                 $conn->close();
@@ -124,10 +129,10 @@
         </div>
 
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
 
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>

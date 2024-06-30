@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Save - Group 33 Health Insurance App</title>
+    <title>Save Hospital/Clinic Data - Group 33 Health Insurance App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -62,12 +62,28 @@
         <?php
         include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
+        function allFieldsFilled($fields) {
+            foreach ($fields as $field) {
+                if (empty($field)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         $hospitalclinicid = $_POST['hospitalclinicid'];
         $hosp_name = $_POST['hosp_name'];
         $addressid = $_POST['addressid'];
         $telephone = $_POST['telephone'];
         $fax = $_POST['fax'];
         $email = $_POST['email'];
+
+        $requiredFields = array($hosp_name, $addressid, $telephone);
+        if (!allFieldsFilled($requiredFields)) {
+            echo "<p>Error: Not all required fields are filled.</p>";
+            echo "<a href='javascript:history.back()'>Go Back to Add New Hospital/Clinic</a>";
+            die();
+        }
 
         $insertSQL = "INSERT INTO hospital_clinic (hospitalclinicid, hosp_name, addressid, telephone, fax, email) 
                       VALUES ('$hospitalclinicid', '$hosp_name', '$addressid', '$telephone', '$fax', '$email')";
@@ -82,10 +98,10 @@
         ?>
 
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
 
         <div class="footer">
-            <p>&copy; 2024 Group 33 (Christos-Spyridon Karydis / Dimitrios Konispoliatis). All rights reserved.</p>
+            <p>&copy; 2024 Group 33 (C. S. Karydis / D. Konispoliatis / A. Georgakopoulos). All rights reserved.</p>
         </div>
     </div>
 </body>
