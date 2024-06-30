@@ -54,7 +54,6 @@
 <body>
     <div class="container">
         <?php 
-        // Ensure addressid is set and numeric
         if (isset($_GET['addressid']) && is_numeric($_GET['addressid'])) {
             $addressid = $_GET['addressid'];
             
@@ -97,7 +96,7 @@
         }
         ?>
         
-        <a href="informantion.html">Return to Show Addresses Page</a>
+        <a href="../information.html">Return to Show Addresses Page</a>
     </div>
 </body>
 </html>

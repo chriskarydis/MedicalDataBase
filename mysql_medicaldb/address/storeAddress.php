@@ -58,11 +58,27 @@
         <?php
         include 'C:/xampp/htdocs/mysql_medicaldb/connDB.php';
 
+        function allFieldsFilled($fields) {
+            foreach ($fields as $field) {
+                if (empty($field)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         $street = $_POST['street'];
         $city = $_POST['city'];
         $region = $_POST['region'];
         $country = $_POST['country'];
         $postal_code = $_POST['postal_code'];
+
+        $requiredFields = array($street, $city, $region, $country, $postal_code);
+        if (!allFieldsFilled($requiredFields)) {
+            echo "<p>Error: Not all required fields are filled.</p>";
+            echo "<a href='javascript:history.back()'>Go Back to Add New Address</a>";
+            die();
+        }
 
         $insertSQL = "INSERT INTO address (street, city, region, country, postal_code) 
                       VALUES ('$street', '$city', '$region', '$country', '$postal_code')";
@@ -77,7 +93,7 @@
         ?>
 
         <br><br>
-        <a href="../informantion.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
     </div>
 </body>
 </html>

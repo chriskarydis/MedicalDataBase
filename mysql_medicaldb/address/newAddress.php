@@ -79,7 +79,7 @@
             <input type="submit" value="Save Address">
         </form>
         <br><br>
-        <a href="../index.html">Return to Home Page</a>
+        <a href="../information.html">Return to Home Page</a>
     </div>
 </body>
 </html>
